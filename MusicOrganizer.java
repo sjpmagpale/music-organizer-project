@@ -43,7 +43,7 @@ public class MusicOrganizer
      */
     public void listFile(int index)
     {
-        if(index >= 0 && index < files.size()) {
+        if(validIndex(index)) {
             String filename = files.get(index);
             System.out.println(filename);
         }
@@ -55,7 +55,7 @@ public class MusicOrganizer
      */
     public void removeFile(int index)
     {
-        if(index >= 0 && index < files.size()) {
+        if(validIndex(index)) {
             files.remove(index);
         }
     }
@@ -79,4 +79,40 @@ public class MusicOrganizer
             return false;
         }
     }
+    
+    public void listAllFiles()
+    {
+        for (String filename:files){
+            System.out.println(filename);
+        }
+    }
+    
+    public void listWithIndex()
+    {
+        int position = 0 ;
+        for (String filename:files){
+            System.out.println(position + ": " + filename);
+            position++;
+        }
+    }
+    
+    public void listMatching(String searchString)
+    {
+        int index = 0;
+        boolean searching = true;
+        
+        while (searching && index < files.size()){
+            String filename = files.get(index);
+            if(filename.contains(searchString)){
+                System.out.println(filename);
+                searching = false;
+            }else {
+                index++;
+            }
+        }
+        if (searching == true ){
+            System.out.println("No Match Found");
+        }
+    }
 }
+
